@@ -1,0 +1,14 @@
+<template>
+    <lightning-card>
+    <template if:true={haveFieldSet}>
+            <lightning-datatable 
+                key-field="Id"
+                columns={columns}
+                data={data}>
+            </lightning-datatable>
+        </template>
+        <template if:false={haveFieldSet}>
+            <lightning-spinner alternative-text="Loading"></lightning-spinner>
+        </template>
+    </lightning-card>
+</template>

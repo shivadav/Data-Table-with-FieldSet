@@ -1,0 +1,33 @@
+public with sharing class AccountControllerFieldSet {
+    
+    @AuraEnabled(Cacheable = true)
+    public static List<Account> getAccountList(){
+        try {
+            String query = 'Select id';
+            for(Schema.FieldSetMember fs: Schema.SObjectType.Account.fieldSets.AccountFieldSet.getFields()){
+                query += ', '+fs.getFieldPath();
+            }
+            query += ' from Account Limit 10';
+            return Database.query(query);
+        } catch (Exception e) {
+            throw new AuraHandledException(e.getMessage());
+        }
+    }
+
+    @AuraEnabled
+    public static Map<String,String> getFieldDetails(){
+        try {
+           //Schema.FieldSet fs1 = Schema.SObjectType.Account.fieldSets.getMap().get('AccountFieldSet');
+           List<Schema.FieldSetMember> fields =  Schema.SObjectType.Account.fieldSets.AccountFieldSet.getFields();
+           String returnJson = '{';
+           Map<String,String> returnMap = new Map<String,String>();
+           for(Schema.FieldSetMember fs: fields){
+            returnMap.put(fs.getLabel(),fs.getFieldPath());
+            //returnJson += 'label'
+           }
+           return returnMap;
+        } catch (Exception e) {
+            throw new AuraHandledException(e.getMessage());
+        }
+    }
+}

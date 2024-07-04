@@ -1,13 +1,13 @@
 <template>
     <lightning-card>
-    <template if:true={haveFieldSet}>
+    <template lwc:if={haveFieldSet}>
             <lightning-datatable 
                 key-field="Id"
                 columns={columns}
-                data={data}>
+                data={cdata}>
             </lightning-datatable>
         </template>
-        <template if:false={haveFieldSet}>
+        <template lwc:if={haveFieldSet}>
             <lightning-spinner alternative-text="Loading"></lightning-spinner>
         </template>
     </lightning-card>

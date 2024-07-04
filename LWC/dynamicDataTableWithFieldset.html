@@ -7,7 +7,7 @@
                 data={cdata}>
             </lightning-datatable>
         </template>
-        <template lwc:if={haveFieldSet}>
+        <template lwc:else>
             <lightning-spinner alternative-text="Loading"></lightning-spinner>
         </template>
     </lightning-card>
